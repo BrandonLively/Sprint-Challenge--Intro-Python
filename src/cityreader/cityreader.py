@@ -83,27 +83,36 @@ for c in cities:
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
-    # within = [city for city in cities if float(lat1) >= city.lat >= float(lat2) and float(lon1) >= city.lon >= float(lon2)]
+    if lat2 < lat1:
+        temp = lat1
+        lat1 = lat2
+        lat2 = temp
+    if lon2 < lon1:
+        temp = lon1
+        lon1 = lon2
+        lon2 = temp
 
-    within = []
+    within = [city for city in cities if float(lat2) >= city.lat >= float(lat1) and float(lon2) >= city.lon >= float(lon1)]
 
-    for city in cities:
-        if lat2 > lat1:
-            if lat1 <= city.lat <= lat2:
-                if lon2 > lon1:
-                    if lon1 <= city.lon <= lon2:
-                        within.append(city)
-                else:
-                    if lon2 <= city.lon <= lon1:
-                        within.append(city)
-        else:
-            if lat2 <= city.lat <= lat1:
-                if lon2 > lon1:
-                    if lon1 <= city.lon <= lon2:
-                        within.append(city)
-                else:
-                    if lon2 <= city.lon <= lon1:
-                        within.append(city)
+
+
+    # for city in cities:
+    #     if lat2 > lat1:
+    #         if lat1 <= city.lat <= lat2:
+    #             if lon2 > lon1:
+    #                 if lon1 <= city.lon <= lon2:
+    #                     within.append(city)
+    #             else:
+    #                 if lon2 <= city.lon <= lon1:
+    #                     within.append(city)
+    #     else:
+    #         if lat2 <= city.lat <= lat1:
+    #             if lon2 > lon1:
+    #                 if lon1 <= city.lon <= lon2:
+    #                     within.append(city)
+    #             else:
+    #                 if lon2 <= city.lon <= lon1:
+    #                     within.append(city)
 
     # TODO Ensure that the lat and lon values are all floats
     # Go through each city and check to see if it falls within
